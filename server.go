@@ -1,29 +1,13 @@
 package main      
-import (
-	"fmt"
-	"net/http"
-	"strings"
-	"log"
-) 
+import "fmt"
+import "math/cmplx"
 
-func sayHello(w http.ResponseWriter, r *http.Request) {
-    r.ParseForm()
-    fmt.Println(r.Form)
-    fmt.Println("path", r.URL.Path)
-    fmt.Println("scheme", r.URL.Scheme)
-    fmt.Println(r.Form["url_long"])
-    for k, v := range r.Form {
-		fmt.Println("key:", k)
-		fmt.Println("val:", strings.Join(v, ""))
-    }
-    fmt.Fprintf(w, "Hello astaxie!") 
-}
+var ToBe bool = false
+var MaxInt uint64 = 1<<64 -1
+var z complex128 = cmplx.Sqrt(-5 + 12i)
 
 func main() {
-    http.HandleFunc("/", sayHello) //设置访问的路由
-	err := http.ListenAndServe(":9090", nil) //设置监听的端口
-	if err != nil {
-		log.Fatal("ListenAndServe: ", err)
-	}
+	fmt.Printf("Type: %T Value: %v\n", ToBe, ToBe)
+	fmt.Printf("Type: %T Value: %v\n", MaxInt, MaxInt)
+	fmt.Printf("Type: %T Value: %v\n", z, z)
 }
-
