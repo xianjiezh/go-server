@@ -1,13 +1,17 @@
 package main      
-import "fmt"
-import "math/cmplx"
+import (
+	"fmt"
+	"net/http"
+)
 
-var ToBe bool = false
-var MaxInt uint64 = 1<<64 -1
-var z complex128 = cmplx.Sqrt(-5 + 12i)
-
-func main() {
-	fmt.Printf("Type: %T Value: %v\n", ToBe, ToBe)
-	fmt.Printf("Type: %T Value: %v\n", MaxInt, MaxInt)
-	fmt.Printf("Type: %T Value: %v\n", z, z)
+func main()  {
+	http.HandleFunc("/", func(w http.ResponseWriter, r *http.Request) {
+		w.Write([]byte("LaLaLaLa"))
+	})
+	http.HandleFunc("/abc", func(w http.ResponseWriter, r *http.Request) {
+		w.Write([]byte("abccccccc"))
+	})
+	if err := http.ListenAndServe(":12345", nil); err != nil {
+		fmt.Println("start http errors", err)
+	}
 }
